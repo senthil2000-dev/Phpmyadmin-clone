@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR);
 require_once("includes/config.php");
 function insert($con, $table, $name_values, $values) {
     $names=implode(", ",$name_values);
@@ -13,7 +14,7 @@ function insert($con, $table, $name_values, $values) {
     for($k=0;$k<sizeof($name_values);$k++) {
         $query->bindParam(":placeholder".$k, $values[$k]);
     }
-    $query->execute();
+    return $query->execute();
 }
 
 function update($con, $table, $names, $values, $cond=0, $conn='OR') {
@@ -38,7 +39,7 @@ function update($con, $table, $names, $values, $cond=0, $conn='OR') {
     for($k=0;$k<sizeof($names);$k++) {
         $query->bindParam(':placeholder'.$k, $values[$k]);
     }
-    $query->execute();
+    return $query->execute();
 }
 
 function select($con, $table, $condition) {
